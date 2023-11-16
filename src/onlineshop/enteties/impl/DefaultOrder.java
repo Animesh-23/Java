@@ -17,7 +17,7 @@ public class DefaultOrder implements Order {
     return (
       creditCardNumber.toCharArray().length ==
       AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER &&
-      !creditCardNumber.contains("") &&
+      !creditCardNumber.contains(" ") &&
       Long.parseLong(creditCardNumber) > 0
     );
   }
