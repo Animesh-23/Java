@@ -6,26 +6,16 @@ import mystore.entities.Product;
 
 public class DefaultCart implements Cart {
 
-  private static final int DEFAULT_CART_CAPACITY = 10;
+  private Product[] products;
+  private static int CART_DEFAULT_CAPACITY = 20;
+  private int lastIndex = 0;
 
   {
-    products = new Product[DEFAULT_CART_CAPACITY];
-  }
-
-  private Product[] products;
-  private int lastIndex;
-
-  @Override
-  public Product[] geProducts() {
-    Product[] requestedProducts = Arrays.copyOf(products, products.length);
-    return requestedProducts;
+    products = new Product[CART_DEFAULT_CAPACITY];
   }
 
   @Override
-  public void addProduct(Product product) {
-    if (product == null) {
-      return;
-    }
+  public void addToCart(Product product) {
     if (lastIndex >= products.length) {
       products = Arrays.copyOf(products, products.length << 1);
     }
@@ -33,8 +23,11 @@ public class DefaultCart implements Cart {
   }
 
   @Override
+  public Product[] geProducts() {
+    return products;
+  }
+
   public void clear() {
-    products = new Product[DEFAULT_CART_CAPACITY];
-    lastIndex = 0;
+    products = new Product[CART_DEFAULT_CAPACITY];
   }
 }

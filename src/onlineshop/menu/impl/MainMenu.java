@@ -89,7 +89,7 @@ public class MainMenu implements Menu {
               break mainLoop;
             default:
               System.out.println(
-                "Only 1, 2, 3, 4, 5 is allowed. Try one more time"
+                "Only 1, 2, 3, 4, 5,6 is allowed. Try one more time"
               );
               continue; // continue endless loop
           }

@@ -3,6 +3,7 @@ package HashMap;
 public class MyMap<K, V> {
 
   private static final int bucketSize = 20;
+  private int size = 0;
   private Node[] bucket;
 
   {
@@ -12,6 +13,10 @@ public class MyMap<K, V> {
   private int getHashIndex(K key) {
     int hashcode = key.hashCode();
     return hashcode % bucketSize;
+  }
+
+  public int size() {
+    return size;
   }
 
   public Object get(K key) {
@@ -44,6 +49,7 @@ public class MyMap<K, V> {
     }
     if (!alreadyPresent) {
       Node node = new Node<K, V>(key, value);
+      size++;
       if (last == null) {
         bucket[bcIdx] = node;
       } else {
@@ -60,6 +66,7 @@ public class MyMap<K, V> {
     }
     if (head.key.equals(key)) {
       bucket[bcIdx] = head.next;
+      size--;
       return;
     }
     Node prev = head;
@@ -67,6 +74,7 @@ public class MyMap<K, V> {
     while (trav != null) {
       if (trav.key.equals(key)) {
         prev.next = trav.next;
+        size--;
         trav = null;
         return;
       }

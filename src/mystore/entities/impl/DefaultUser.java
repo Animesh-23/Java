@@ -4,20 +4,25 @@ import mystore.entities.User;
 
 public class DefaultUser implements User {
 
-  private String name;
   private int id;
+  private String name;
   private String email;
   private String password;
 
-  public DefaultUser(String name, int id, String email, String password) {
+  private static int counter = 0;
+
+  {
+    id = ++counter;
+  }
+
+  public DefaultUser(String name, String email, String password) {
     this.name = name;
-    this.id = id;
     this.email = email;
     this.password = password;
   }
 
   @Override
-  public String getUserName() {
+  public String getName() {
     return name;
   }
 
@@ -32,7 +37,17 @@ public class DefaultUser implements User {
   }
 
   @Override
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  @Override
   public String getPassword() {
     return password;
+  }
+
+  @Override
+  public void setPassword(String password) {
+    this.password = password;
   }
 }
