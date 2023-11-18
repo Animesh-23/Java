@@ -17,7 +17,7 @@ public class Main {
       if (choice == 0) {
         set.unionBySize(u, v);
       } else if (choice == 99) {
-        break;
+        break; 
       } else {
         System.out.println(set.isConnected(u, v));
       }
