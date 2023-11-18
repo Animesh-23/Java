@@ -1,6 +1,7 @@
 package mystore.config;
 
 import mystore.entities.Cart;
+import mystore.entities.Product;
 import mystore.entities.User;
 import mystore.entities.impl.DefaultCart;
 
@@ -29,6 +30,14 @@ public class ApplicationContext {
     sessionCart.clear();
     this.loggedInUser = user;
     sessionCart = new DefaultCart();
+  }
+
+  public void addProduct(Product product) {
+    sessionCart.addToCart(product);
+  }
+
+  public Cart getCart() {
+    return sessionCart;
   }
 
   public void logOutUser() {
