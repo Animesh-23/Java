@@ -15,9 +15,9 @@ public class Main {
       System.out.println("Enter a second node");
       int v = sc.nextInt();
       if (choice == 0) {
-        set.unionBySize(u, v);
+        set.union(u, v);
       } else if (choice == 99) {
-        break; 
+        break;
       } else {
         System.out.println(set.isConnected(u, v));
       }
