@@ -3,12 +3,10 @@ package disjoint;
 public class DisjointSet {
 
   private int[] parent;
-  private int[] rank;
   private int[] size;
 
   public DisjointSet(int vertices) {
     parent = new int[vertices + 1];
-    rank = new int[vertices + 1];
     size = new int[vertices + 1];
     fillParent();
   }
@@ -34,20 +32,7 @@ public class DisjointSet {
     return pu == pv;
   }
 
-  public void unionByRank(int u, int v) {
-    int pu = findParent(u);
-    int pv = findParent(v);
-    if (rank[pu] > rank[pv]) {
-      parent[pv] = parent[pu];
-    } else if (rank[pu] == rank[pv]) {
-      parent[pv] = parent[pu];
-      rank[pu]++;
-    } else {
-      parent[pu] = parent[pv];
-    }
-  }
-
-  public void unionBySize(int u, int v) {
+  public void union(int u, int v) {
     int pu = findParent(u);
     int pv = findParent(v);
     if (size[pu] == size[pv]) {
