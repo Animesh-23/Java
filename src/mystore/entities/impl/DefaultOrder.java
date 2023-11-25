@@ -51,14 +51,15 @@ public class DefaultOrder implements Order {
   @Override
   public String toString() {
     return (
-      "AccountNumber = " +
+      "[AccountNumber = " +
       accountNumber +
       ", totalPrice = " +
       totalPrice +
       ", date and time = " +
       dateAndTime +
       ", items = " +
-      items
+      items +
+      "]"
     );
   }
 }

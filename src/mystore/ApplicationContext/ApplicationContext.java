@@ -14,7 +14,7 @@ public class ApplicationContext {
     return instance;
   }
 
-  public User gerLoggedInUser() {
+  public User getLoggedInUser() {
     return loggedInUser;
   }
 

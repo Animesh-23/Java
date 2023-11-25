@@ -26,6 +26,7 @@ public class DefaultUser implements User {
     this.password = password;
     this.email = email;
     orders = new Order[DEFAULT_ORDER_CAPACITY];
+    cart = new DefaultCart();
   }
 
   @Override
@@ -70,7 +71,7 @@ public class DefaultUser implements User {
 
   @Override
   public String toString() {
-    return "id = " + id + ", name = " + name + ", email = " + email;
+    return "[id = " + id + ", name = " + name + ", email = " + email + "]";
   }
 
   @Override
@@ -79,5 +80,10 @@ public class DefaultUser implements User {
       orders = Arrays.copyOf(orders, orders.length << 1);
     }
     orders[lastIndex++] = order;
+  }
+
+  @Override
+  public void emptyCart() {
+    cart = new DefaultCart();
   }
 }

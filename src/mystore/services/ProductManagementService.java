@@ -6,7 +6,7 @@ import mystore.entities.impl.DefaultProduct;
 public class ProductManagementService {
 
   private Product[] products;
-  public static ProductManagementService instance;
+  private static ProductManagementService instance;
 
   public static ProductManagementService getInstance() {
     if (instance == null) {

@@ -10,4 +10,5 @@ public interface User {
   void setEmail(String email);
   int getId();
   void addOrder(Order order);
+  void emptyCart();
 }
