@@ -1,7 +1,7 @@
 package mystore.menu.impl;
 
-import java.util.Arrays;
 import mystore.ApplicationContext.ApplicationContext;
+import mystore.entities.Order;
 import mystore.entities.User;
 import mystore.menu.Menu;
 
@@ -21,7 +21,9 @@ public class OrderMenu implements Menu {
       System.out.println("Login first");
       return;
     }
-    System.out.println(Arrays.toString(user.getOrders()));
+    for (Order order : user.getOrders()) {
+      System.out.println(order);
+    }
   }
 
   @Override

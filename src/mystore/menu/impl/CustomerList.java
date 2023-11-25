@@ -22,7 +22,9 @@ public class CustomerList implements Menu {
       System.out.println("Currently ther are no customers ");
       return;
     }
-    System.out.println(Arrays.toString(users));
+    for (User user : users) {
+      System.out.println(user);
+    }
     Scanner sc = new Scanner(System.in);
     String buff = sc.next();
   }

@@ -78,6 +78,8 @@ public class ProductCatlog implements Menu {
   @Override
   public void printHeader() {
     System.out.println("******* Products *******");
-    System.out.println(Arrays.toString(contextProduct.getProducts()));
+    for (Product product : contextProduct.getProducts()) {
+      System.out.println(product);
+    }
   }
 }

@@ -51,7 +51,20 @@ public class DefaultUser implements User {
 
   @Override
   public Order[] getOrders() {
-    return orders;
+    int notNullOrdersCount = 0;
+    for (Order order : orders) {
+      if (order != null) {
+        notNullOrdersCount++;
+      }
+    }
+    Order[] notNullOrders = new Order[notNullOrdersCount];
+    int idx = 0;
+    for (Order order : orders) {
+      if (order != null) {
+        notNullOrders[idx++] = order;
+      }
+    }
+    return notNullOrders;
   }
 
   @Override

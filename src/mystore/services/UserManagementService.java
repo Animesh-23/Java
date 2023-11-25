@@ -56,9 +56,20 @@ public class UserManagementService {
   }
 
   public User[] getUsers() {
-    if (lastIndex == 0) {
-      return new User[0];
+    int notNullUserCount = 0;
+    for (User user : users) {
+      if (user != null) {
+        notNullUserCount++;
+      }
     }
-    return users;
+    User[] notNullUsers = new User[notNullUserCount];
+    int index = 0;
+    for (User user : users) {
+      if (user != null) {
+        notNullUsers[index++] = user;
+      }
+    }
+
+    return notNullUsers;
   }
 }
