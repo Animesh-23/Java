@@ -1,4 +1,4 @@
 # Java
 
 practicing the java skills while learning
-and also git and github
+and also git and github.
