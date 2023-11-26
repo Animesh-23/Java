@@ -1,5 +1,4 @@
 # Java
-<<<<<<< HEAD
-=======
+
 practicing the java skills while learning
->>>>>>> main
+and also git
