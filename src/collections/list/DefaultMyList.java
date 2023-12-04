@@ -1,85 +1,134 @@
 package collections.list;
 
-import java.util.Arrays;
+public class DefaultMyList implements MyList {
 
-public class DefaultMyList<E> implements MyList {
-
-  private int lastIndex = 0;
-
-  private int capacity = 16;
-  private Object[] list;
+  private Node head;
+  private Node tail;
+  private int size;
 
   public DefaultMyList() {
-    list = new Object[capacity];
-  }
-
-  public DefaultMyList(int capacity) {
-    list = new Object[capacity];
-    this.capacity = capacity;
+    head = null;
+    tail = null;
+    size = 0;
   }
 
   @Override
   public void add(Object e) {
-    if (lastIndex == list.length) {
-      list = Arrays.copyOf(list, list.length << 1);
+    Node node = new Node(e);
+    size++;
+    if (head == null) {
+      head = node;
+      head.prev = null;
+      head.next = null;
+      tail = head;
+    } else {
+      node.prev = tail;
+      node.next = null;
+      tail.next = node;
+      tail = node;
     }
-    list[lastIndex] = e;
   }
 
   @Override
   public void clear() {
-    lastIndex = 0;
-    list = new Object[capacity];
+    head = null;
+    tail = null;
+    size = 0;
   }
 
   @Override
   public boolean remove(Object o) {
-    if (lastIndex == 0) {
-      return false;
-    }
-    Object[] newList = new Object[lastIndex - 1];
-    boolean found = false;
-    int idx = 0;
-    for (int i = 0; i < lastIndex; i++) {
-      if (list[i].equals(o)) {
-        found = true;
-        continue;
+    Node trav = head;
+    if (head.val.equals(o)) {
+      if (head.next == null) {
+        clear();
+      } else {
+        head = head.next;
+        head.prev = null;
       }
-      if (i == lastIndex - 1 && !found) {
-        newList = null;
-        return false;
-      }
-      newList[idx++] = list[i];
+      size--;
     }
-    list = newList;
-    return true;
+    Node prev = head;
+    trav = trav.next;
+    while (trav != null) {
+      if (trav.val.equals(o)) {
+        if (trav.next == null) {
+          prev.next = null;
+        } else {
+          prev.next = trav.next;
+          trav.next.prev = prev;
+        }
+        size--;
+        return true;
+      }
+      prev = prev.next;
+      trav = trav.next;
+    }
+    return false;
   }
 
   @Override
   public Object[] toArray() {
-    return list;
+    Object[] arr = new Object[size];
+    Node trav = head;
+    int idx = 0;
+    while (trav != null) {
+      arr[idx++] = trav.val;
+      trav = trav.next;
+    }
+    return arr;
   }
 
   @Override
   public int size() {
-    return lastIndex;
+    return size;
   }
 
   @Override
   public boolean contains(Object o) {
-    for (Object e : list) {
-      if (e.equals(o)) {
+    Node trav = head;
+    while (trav != null) {
+      if (trav.val.equals(o)) {
         return true;
       }
+      trav = trav.next;
     }
     return false;
   }
 
   @Override
   public boolean containsAll(MyList c) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException(
-      "Unimplemented method 'containsAll'"
-    );
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder("[");
+    Node trav = head;
+    while (trav != null) {
+      sb.append(trav.val);
+      trav = trav.next;
+      if (trav != null) {
+        sb.append(",");
+      }
+    }
+    sb.append("]");
+    return String.valueOf(sb);
+  }
+
+  private class Node {
+
+    private Node prev;
+    private Node next;
+    private Object val;
+
+    public Node(Object val) {
+      this.val = val;
+    }
+
+    @Override
+    public String toString() {
+      return val + "";
+    }
   }
 }

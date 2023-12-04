@@ -1,6 +1,6 @@
 package collections.list;
 
-public interface MyList<E> {
+public interface MyList {
   /**
    * Appends the specified element to the end of this list (optional
    * operation).
