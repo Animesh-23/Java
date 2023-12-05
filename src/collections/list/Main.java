@@ -1,5 +1,7 @@
 package collections.list;
 
+import java.util.Iterator;
+
 public class Main {
 
   public static void main(String[] args) {
@@ -9,7 +11,14 @@ public class Main {
     list.add(3);
     list.add(4);
 
-    list.remove(4);
-    System.out.println(list.size());
+    Iterator itr = list.iterator();
+    System.out.println(itr.next());
+    System.out.println(itr.next());
+    itr.remove();
+    itr.remove();
+    System.out.println(itr.next());
+    for (Object o : list) {
+      System.out.println(o);
+    }
   }
 }

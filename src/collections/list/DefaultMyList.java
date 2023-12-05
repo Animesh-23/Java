@@ -1,5 +1,8 @@
 package collections.list;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class DefaultMyList implements MyList {
 
   private Node head;
@@ -98,6 +101,12 @@ public class DefaultMyList implements MyList {
 
   @Override
   public boolean containsAll(MyList c) {
+    Object[] array = c.toArray();
+    for (int i = 0; i < array.length; i++) {
+      if (!contains(array[i])) {
+        return false;
+      }
+    }
     return true;
   }
 
@@ -114,6 +123,48 @@ public class DefaultMyList implements MyList {
     }
     sb.append("]");
     return String.valueOf(sb);
+  }
+
+  @Override
+  public Iterator<Object> iterator() {
+    Iterator<Object> iterator = new IteratorImpl(head);
+
+    return iterator;
+  }
+
+  private class IteratorImpl implements Iterator<Object> {
+
+    private Node curr;
+    private int lastMeth = 0;
+    private Node lastNode;
+
+    public IteratorImpl(Node head) {
+      curr = head;
+      lastNode = null;
+    }
+
+    public boolean hasNext() {
+      return curr != null;
+    }
+
+    public Object next() {
+      if (curr == null) {
+        throw new NoSuchElementException();
+      }
+      Node node = curr;
+      lastNode = node;
+      curr = curr.next;
+      lastMeth = 1;
+      return node;
+    }
+
+    public void remove() {
+      if (lastNode == null) {
+        throw new IllegalStateException();
+      }
+      DefaultMyList.this.remove(lastNode.val);
+      lastNode = null;
+    }
   }
 
   private class Node {
