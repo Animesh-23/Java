@@ -3,7 +3,7 @@ package collections.list;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class DefaultMyList implements MyList {
+public class DefaultMyList implements MyList, ListIterable {
 
   private Node head;
   private Node tail;
@@ -134,14 +134,15 @@ public class DefaultMyList implements MyList {
 
   private class IteratorImpl implements Iterator<Object> {
 
-    private Node curr;
-    private int lastMeth = 0;
-    private Node lastNode;
+    Node curr;
+    Node lastNode;
 
     public IteratorImpl(Node head) {
       curr = head;
       lastNode = null;
     }
+
+    public IteratorImpl() {}
 
     public boolean hasNext() {
       return curr != null;
@@ -154,8 +155,7 @@ public class DefaultMyList implements MyList {
       Node node = curr;
       lastNode = node;
       curr = curr.next;
-      lastMeth = 1;
-      return node;
+      return node.val;
     }
 
     public void remove() {
@@ -181,5 +181,44 @@ public class DefaultMyList implements MyList {
     public String toString() {
       return val + "";
     }
+  }
+
+  private class ListIteratorImpl extends IteratorImpl implements ListIterator {
+
+    public ListIteratorImpl(Node head) {
+      curr = head;
+      lastNode = null;
+    }
+
+    @Override
+    public boolean hasPrevious() {
+      return curr.prev != null;
+    }
+
+    @Override
+    public Object previous() {
+      if (curr == null || curr.prev == null) {
+        throw new NoSuchElementException();
+      }
+      Node node = curr.prev;
+      lastNode = node;
+      curr = curr.prev;
+
+      return node.val;
+    }
+
+    @Override
+    public void set(Object e) {
+      if (lastNode == null) {
+        throw new IllegalStateException();
+      }
+      lastNode.val = e;
+      lastNode = null;
+    }
+  }
+
+  @Override
+  public ListIterator listIterator() {
+    return new ListIteratorImpl(head);
   }
 }
